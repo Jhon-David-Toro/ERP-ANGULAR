@@ -1,0 +1,72 @@
+@use '../variables';
+
+@function media-max-width-correction($breakpoint) {
+	@return $breakpoint - 0.1px;
+}
+
+// BREAKPOINT_XS - BREAKPOINT_SM (0 - 575.9999)
+@mixin media-xs {
+	@media (max-width: media-max-width-correction(variables.$breakpoint-value-sm)) {
+		@content;
+	}
+}
+// SM/MD/LG/XL
+@mixin media-gtxs {
+	@media (min-width: variables.$breakpoint-value-sm) {
+		@content;
+	}
+}
+// BREAKPOINT_SM - BREAKPOINT_MD (576 - 767.9999)
+@mixin media-sm {
+	@media (min-width: variables.$breakpoint-value-sm) and (max-width: media-max-width-correction(variables.$breakpoint-value-md)) {
+		@content;
+	}
+}
+// MD/LG/XL
+@mixin media-gtsm {
+	@media (min-width: variables.$breakpoint-value-md) {
+		@content;
+	}
+}
+// BREAKPOINT_MD - BREAKPOINT_LG (768 - 1023.9999)
+@mixin media-md {
+	@media (min-width: variables.$breakpoint-value-md) and (max-width: media-max-width-correction(variables.$breakpoint-value-lg)) {
+		@content;
+	}
+}
+// SM/XS
+@mixin media-ltmd {
+	@media (max-width: media-max-width-correction(variables.$breakpoint-value-md)) {
+		@content;
+	}
+}
+// LG/XL
+@mixin media-gtmd {
+	@media (min-width: variables.$breakpoint-value-lg) {
+		@content;
+	}
+}
+// BREAKPOINT_LG - BREAKPOINT_XL (1024 - 1439.9999)
+@mixin media-lg {
+	@media (min-width: variables.$breakpoint-value-lg) and (max-width: media-max-width-correction(variables.$breakpoint-value-xl)) {
+		@content;
+	}
+}
+// MD/SM/XS
+@mixin media-ltlg {
+	@media (max-width: media-max-width-correction(variables.$breakpoint-value-lg)) {
+		@content;
+	}
+}
+// BREAKPOINT_XL - INFINITY (1440 - INF)
+@mixin media-xl {
+	@media (min-width: variables.$breakpoint-value-xl) {
+		@content;
+	}
+}
+// LG/MD/SM/XS
+@mixin media-ltxl {
+	@media (max-width: media-max-width-correction(variables.$breakpoint-value-xl)) {
+		@content;
+	}
+}

@@ -1,0 +1,12 @@
+@use 'sass:math';
+
+/* LAYOUT */
+$spacing-standard: 16px;
+$spacing-medium: $spacing-standard * 1.5; // 24px
+$spacing-large: $spacing-standard * 2; // 32px
+$spacing-xl: $spacing-large * 2; // 64px
+$spacing-small: math.div($spacing-standard, 2); // 8px
+$spacing-xs: math.div($spacing-standard, 4); // 4px
+$content-spacing-top: 45px;
+$content-spacing-top-mobile: 25px;
+$brand-menu-width: 240px;

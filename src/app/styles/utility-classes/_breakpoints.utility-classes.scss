@@ -1,0 +1,79 @@
+@use '../mixins';
+$displays: block, flex, grid, inline-block, inline;
+
+@mixin styles-for-class-suffix($suffix, $display) {
+	.media-xs#{$suffix}, .media-gtxs#{$suffix}, .media-sm#{$suffix}, .media-gtsm#{$suffix}, .media-md#{$suffix}, .media-ltmd#{$suffix}, .media-lg#{$suffix}, .media-ltlg#{$suffix}, .media-xl#{$suffix}, .media-ltxl#{$suffix}{
+		display: none !important;
+	}
+	@include mixins.media-xs() {
+			.media-xs#{$suffix} {
+			display: $display !important;
+		}
+	}
+	@include mixins.media-gtxs() {
+			.media-gtxs#{$suffix} {
+			display: $display !important;
+		}
+	}
+	@include mixins.media-sm() {
+			.media-sm#{$suffix} {
+			display: $display !important;
+		}
+	}
+	
+	@include mixins.media-gtsm() {
+			.media-gtsm#{$suffix} {
+			display: $display !important;
+		}
+	}
+	
+	@include mixins.media-md() {
+			.media-md#{$suffix} {
+			display: $display !important;
+		}
+	}
+	
+	@include mixins.media-ltmd() {
+			.media-ltmd#{$suffix} {
+			display: $display !important;
+		}
+	}
+	
+	@include mixins.media-gtmd() {
+			.media-gtmd#{$suffix} {
+			display: $display !important;
+		}
+	}
+	
+	@include mixins.media-lg() {
+			.media-lg#{$suffix} {
+			display: $display !important;
+		}
+	}
+	
+	@include mixins.media-ltlg() {
+			.media-ltlg#{$suffix} {
+			display: $display !important;
+		}
+	}
+	
+	@include mixins.media-xl() {
+			.media-xl#{$suffix} {
+			display: $display !important;
+		}
+	}
+	
+	@include mixins.media-ltxl() {
+			.media-ltxl#{$suffix} {
+			display: $display !important;
+		}
+	}
+}
+
+@each $display in $displays {
+	@if ($display == block) {
+		@include styles-for-class-suffix('', $display);
+	} @else {
+		@include styles-for-class-suffix(-#{$display}, $display);
+	}
+}

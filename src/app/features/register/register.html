@@ -1,0 +1,137 @@
+<main class="signup" aria-labelledby="signup-title">
+
+    <section class="hero">
+        <h2 class="hero__title">Únete a nosotros</h2>
+        <p class="hero__descripcion">Access to thousands of design resources and templates</p>
+        <img src="https://res.cloudinary.com/dxspvj1rj/image/upload/v1787798781/Illustration_a4sjkh.png" alt="">
+    </section>
+
+    <form class="form" [formGroup]="form" (ngSubmit)="onSubmitForm()" novalidate>
+        <h2 id="signup-title" class="form__title">Regístrate ahora</h2>
+
+        <fieldset class="form__row">
+            <legend class="sr-only">Nombre completo</legend>
+
+            <label class="field" for="firstName">
+                <span class="field__label">Nombres</span>
+
+                <input class="field__control" type="text" id="firstName" formControlName="firstName"
+                    autocomplete="given-name" required aria-describedby="firstName-error"
+                    [attr.aria-invalid]="isInvalid('firstName')" />
+
+                <p class="field__error" id="firstName-error" [hidden]="!isInvalid('firstName')">
+                    {{ getError('firstName') }}
+                </p>
+            </label>
+
+            <label class="field" for="lastName">
+                <span class="field__label">Apellidos</span>
+
+                <input class="field__control" type="text" id="lastName" formControlName="lastName"
+                    autocomplete="family-name" required aria-describedby="lastName-error"
+                    [attr.aria-invalid]="isInvalid('lastName')" />
+
+                <p class="field__error" id="lastName-error" [hidden]="!isInvalid('lastName')">
+                    {{ getError('lastName') }}
+                </p>
+            </label>
+        </fieldset>
+
+        <label class="field" for="email">
+            <span class="field__label">Correo electrónico</span>
+
+            <input class="field__control" type="email" id="email" formControlName="email" autocomplete="email" required
+                aria-describedby="email-error" [attr.aria-invalid]="isInvalid('email')" />
+
+            <p class="field__error" id="email-error" [hidden]="!isInvalid('email')">
+                {{ getError('email') }}
+            </p>
+        </label>
+
+        <fieldset class="field field--phone">
+            <legend class="field__label">Número de celular</legend>
+
+            <div class="phone" [class.phone--invalid]="isInvalid('phone')">
+                <!-- <select
+          class="phone__prefix"
+          formControlName="countryCode"
+          aria-label="Código de país"
+        >
+          <option value="+1">🇺🇸 +1</option>
+          <option value="+57">🇨🇴 +57</option>
+          <option value="+51">🇵🇪 +51</option>
+        </select> -->
+
+                <input class="phone__number" type="tel" id="phone" formControlName="phone" autocomplete="tel"
+                    inputmode="tel" required aria-describedby="phone-error" [attr.aria-invalid]="isInvalid('phone')" />
+            </div>
+
+            <p class="field__error" id="phone-error" [hidden]="!isInvalid('phone')">
+                {{ getError('phone') }}
+            </p>
+        </fieldset>
+
+        <div class="field">
+            <label class="field__label" for="password">Contraseña</label>
+
+            <div class="password">
+                <input class="field__control" [type]="passwordInputType()" id="password" formControlName="password"
+                    autocomplete="new-password" aria-describedby="password-help password-error" required
+                    [attr.aria-invalid]="isInvalid('password')" />
+
+                <button class="password__toggle" type="button" [attr.aria-label]="passwordAriaLabel()"
+                    [attr.aria-pressed]="showPassword()" (click)="togglePassword()">
+                    {{ passwordButtonText() }}
+                </button>
+            </div>
+            <p class="field__error" id="password-error" [hidden]="!isInvalid('password')">
+                {{ getError('password') }}
+            </p>
+
+            <p class="field__hint" id="password-help">
+                Usa 8 o más caracteres con una mezcla de letras, números y símbolos
+            </p>
+
+        </div>
+
+        <fieldset class="form__checks">
+            <legend class="sr-only">Consentimientos</legend>
+
+            <label class="check" for="terms">
+                <input type="checkbox" id="terms" formControlName="terms" required aria-describedby="terms-error"
+                    [attr.aria-invalid]="isInvalid('terms')" />
+
+                <span>
+                    Al crear una cuenta, acepto los
+                    <a href="#">Términos de uso</a>
+                    y la
+                    <a href="#">Política de privacidad</a>.
+                </span>
+            </label>
+
+            <p class="field__error" id="terms-error" [hidden]="!isInvalid('terms')">
+                {{ getError('terms') }}
+            </p>
+
+            <label class="check" for="marketing">
+                <input type="checkbox" id="marketing" formControlName="marketing" />
+
+                <span>
+                    También acepto recibir mensajes SMS y correos electrónicos con
+                    novedades, eventos y promociones.
+                </span>
+            </label>
+        </fieldset>
+
+        <footer class="form__footer">
+            <button class="form__submit" type="submit" [disabled]="isSubmitting()">
+                {{ isSubmitting() ? 'Registrando...' : 'Registrarse' }}
+            </button>
+
+            <p class="form__login">
+                ¿Ya tienes una cuenta?
+                <a href="#">Inicia sesión</a>
+            </p>
+        </footer>
+    </form>
+</main>

@@ -1,0 +1,249 @@
+@use '../../styles/mixins' as *;
+@use '../../styles/functions' as *;
+
+.signup {
+  background-color: #1F1F1F;
+  height: 100dvh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: pxToRem(24px);
+
+  @include media-ltlg() {
+    flex-direction: column;
+  }
+}
+
+.hero{
+  max-width: pxToRem(498px);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  &__title {
+    color: white;
+    font-size: pxToRem(48px);
+    font-weight: 600;
+    margin: 0;
+  }
+
+  &__descripcion {
+    font-size: pxToRem(20px);
+    color: white;
+    font-weight: 200;
+    margin: 0;
+  }
+}
+
+.form {
+  width: min(100%, pxToRem(600px));
+  padding: pxToRem(40px) pxToRem(72px);
+  background: #fff;
+  border-radius: pxToRem(24px);
+  display: grid;
+  gap: pxToRem(14px);
+  box-sizing: border-box;
+
+  &__title {
+    margin: 0 0 pxToRem(14px);
+    color: #333;
+    font-size: pxToRem(24px);
+    font-weight: 600;
+  }
+
+  &__row {
+    border: 0;
+    padding: 0;
+    margin: 0;
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: pxToRem(12px);
+    
+    @include media-xs() {
+      grid-template-columns: 1fr;
+    }
+  }
+
+  &__checks {
+    border: 0;
+    padding: 0;
+    margin: pxToRem(14px) 0 0;
+    display: grid;
+    gap: pxToRem(16px);
+  }
+
+  &__footer {
+    margin-top: pxToRem(12px);
+    display: flex;
+    align-items: center;
+    gap: pxToRem(16px);
+
+    @include media-xs() {
+      align-items: flex-start;
+      flex-direction: column;
+    }
+  }
+
+  &__submit {
+    height: pxToRem(48px);
+    padding: 0 pxToRem(28px);
+    border: 0;
+    border-radius: pxToRem(16px);
+    background: #6d6a70;
+    color: #fff;
+    font-size: pxToRem(14px);
+    font-weight: 600;
+    cursor: pointer;
+  }
+
+  &__login {
+    margin: 0;
+    font-size: pxToRem(13px);
+    color: #333;
+  }
+
+  a {
+    color: #111;
+    text-decoration: underline;
+  }
+
+  @include media-xs() {
+    padding: pxToRem(32px) pxToRem(24px);
+  }
+}
+
+.field {
+  display: block;
+  min-width: 0;
+  border: 0;
+  padding: 0;
+  margin: 0;
+
+  &__error {
+    font-size: pxToRem(13px);
+    font-weight: 400;
+    color: #d32f2f;
+  }
+
+  &__label {
+    display: block;
+    margin-bottom: pxToRem(6px);
+    color: #666;
+    font-size: pxToRem(13px);
+    font-weight: 400;
+  }
+
+  &__control {
+    width: 100%;
+    height: pxToRem(50px);
+    padding: 0 pxToRem(12px);
+    border: pxToRem(1px) solid #d7d7d7;
+    border-radius: pxToRem(8px);
+    outline: none;
+    font-size: pxToRem(14px);
+    box-sizing: border-box;
+    transition: border-color 0.2s;
+
+    &:focus {
+      border-color: #111;
+    }
+
+    &[aria-invalid="true"] {
+      border-color: #d32f2f;
+    }
+  }
+
+  &__hint {
+    margin: pxToRem(6px) 0 0;
+    color: #777;
+    font-size: pxToRem(11px);
+    line-height: 1.4;
+  }
+}
+
+.phone {
+  height: pxToRem(50px);
+  display: flex;
+  align-items: center;
+  border: pxToRem(1px) solid #d7d7d7;
+  border-radius: pxToRem(8px);
+  overflow: hidden;
+  transition: border-color 0.2s;
+
+  &:focus-within {
+    border-color: #111;
+  }
+
+  &--invalid {
+    border-color: #d32f2f;
+  }
+
+  &__prefix {
+    height: 100%;
+    padding: 0 pxToRem(10px);
+    border: 0;
+    outline: 0;
+    background: transparent;
+    font-size: pxToRem(14px);
+  }
+
+  &__number {
+    flex: 1;
+    min-width: 0;
+    height: 100%;
+    padding: 0 pxToRem(12px);
+    border: 0;
+    outline: 0;
+    font-size: pxToRem(14px);
+  }
+}
+
+.password {
+  position: relative;
+
+  .field__control {
+    padding-right: pxToRem(70px);
+  }
+
+  &__toggle {
+    position: absolute;
+    top: 50%;
+    right: pxToRem(12px);
+    transform: translateY(-50%);
+    border: 0;
+    background: transparent;
+    color: #777;
+    font-size: pxToRem(13px);
+    cursor: pointer;
+  }
+}
+
+.check {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  gap: pxToRem(10px);
+  align-items: start;
+  font-size: pxToRem(13px);
+  line-height: 1.35;
+  color: #333;
+
+  input {
+    width: pxToRem(14px);
+    height: pxToRem(14px);
+    margin-top: pxToRem(2px);
+    accent-color: #111;
+  }
+
+  span {
+    display: block;
+  }
+}
+
+.sr-only {
+  position: absolute;
+  width: pxToRem(1px);
+  height: pxToRem(1px);
+  overflow: hidden;
+  clip-path: inset(50%);
+  white-space: nowrap;
+}
