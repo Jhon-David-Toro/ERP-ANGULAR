@@ -49,7 +49,8 @@ export class UserService{
 
         this.setCurrentUser(foundUser.id);
 
-        const { password, ...publicUser } = foundUser;
+        const { password: _password, ...publicUser } = foundUser;
+         void _password;
 
         return publicUser;
     }
