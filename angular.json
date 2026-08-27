@@ -24,6 +24,9 @@
             "browser": "src/main.ts",
             "tsConfig": "tsconfig.app.json",
             "inlineStyleLanguage": "scss",
+            "stylePreprocessorOptions": {
+              "includePaths": ["src/app"]
+            },
             "assets": [
               {
                 "glob": "**/*",
@@ -34,6 +37,7 @@
           },
           "configurations": {
             "production": {
+              "baseHref": "/erp-angular/",
               "budgets": [
                 {
                   "type": "initial",

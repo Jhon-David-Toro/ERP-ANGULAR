@@ -38,7 +38,7 @@
                 id="firstName"
                 label="Nombres"
                 autocomplete="given-name"
-                icon="/icons/user.svg"
+                icon="icons/user.svg"
                 formControlName="firstName"
                 [describedBy]="'firstName-error'"
                 [placeholder]="'Escribe tus nombres'"
@@ -50,7 +50,7 @@
                 id="lastName"
                 label="Apellidos"
                 autocomplete="family-name"
-                icon="/icons/user.svg"
+                icon="icons/user.svg"
                 formControlName="lastName"
                 [describedBy]="'lastName-error'"
                 [placeholder]="'Escribe tus apellidos'"
@@ -66,7 +66,7 @@
             autocomplete="email"
             formControlName="email"
             [placeholder]="'Escribe tu correo electrónico'"
-            icon="/icons/mail.svg"
+            icon="icons/mail.svg"
             [describedBy]="'email-error'"
             [invalid]="isInvalid('email')"
             [error]="getError('email')"
@@ -88,7 +88,7 @@
                 inputMode="tel"
                 autocomplete="tel"
                 [placeholder]="'Dígita tu número'"
-                icon="/icons/phone.svg"
+                icon="icons/phone.svg"
                 formControlName="phone"
                 [required]="true"
                 [describedBy]="'phone-error'"
@@ -105,7 +105,7 @@
                 label="Contraseña"
                 [type]="passwordInputType()"
                 autocomplete="new-password"
-                icon="/icons/lock.svg"
+                icon="icons/lock.svg"
                 formControlName="password"
                 [required]="true"
                 [hasSuffix]="true"
@@ -123,7 +123,7 @@
             >
                 <img
                     class="password__icon"
-                    [src]="showPassword() ? '/icons/eye.svg' : '/icons/eye-off.svg'"
+                    [src]="showPassword() ? 'icons/eye.svg' : 'icons/eye-off.svg'"
                     alt=""
                     aria-hidden="true"
                 />
@@ -135,7 +135,7 @@
                 label="Repetir contraseña"
                 [type]="passwordInputType()"
                 autocomplete="new-password"
-                icon="/icons/lock.svg"
+                icon="icons/lock.svg"
                 formControlName="confirmPassword"
                 [required]="true"
                 [hasSuffix]="true"
@@ -153,7 +153,7 @@
                 >
                     <img
                         class="password__icon"
-                        [src]="showPassword() ? '/icons/eye.svg' : '/icons/eye-off.svg'"
+                        [src]="showPassword() ? 'icons/eye.svg' : 'icons/eye-off.svg'"
                         alt=""
                         aria-hidden="true"
                     />
