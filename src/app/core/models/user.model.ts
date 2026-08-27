@@ -9,6 +9,7 @@ export interface User {
   last_name: string;
   email: string;
   role: UserRole;
+  country: Country;
   phone_number: number;
   password: string;
   is_active: boolean;
@@ -16,14 +17,11 @@ export interface User {
   updated_at: string;
 }
 
+export type PublicUser = Omit<User, 'password'>;
+
 export const createUserId = (): string => {
   return uuidv7();
 };
-
-export interface LoginDTO {
-  email: string;
-  password: string;
-}
 
 export interface RegisterDTO {
   first_name: string;
