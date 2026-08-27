@@ -51,19 +51,19 @@ Open `http://localhost:4200/` in a browser. The development server reloads autom
 
 ### Available routes
 
-| Route | Description |
-| --- | --- |
-| `/auth/login` | Login screen scaffold |
-| `/auth/register` | Registration form |
+| Route            | Description           |
+| ---------------- | --------------------- |
+| `/auth/login`    | Login screen scaffold |
+| `/auth/register` | Registration form     |
 
 ### Scripts
 
-| Command | Description |
-| --- | --- |
-| `npm start` | Start the local development server |
-| `npm run build` | Create a production build in `dist/` |
+| Command         | Description                                            |
+| --------------- | ------------------------------------------------------ |
+| `npm start`     | Start the local development server                     |
+| `npm run build` | Create a production build in `dist/`                   |
 | `npm run watch` | Build continuously using the development configuration |
-| `npm test` | Run unit tests with Angular and Vitest |
+| `npm test`      | Run unit tests with Angular and Vitest                 |
 
 ### Project structure
 
@@ -138,19 +138,19 @@ Abre `http://localhost:4200/` en el navegador. El servidor de desarrollo se actu
 
 ### Rutas disponibles
 
-| Ruta | Descripción |
-| --- | --- |
-| `/auth/login` | Estructura inicial de inicio de sesión |
-| `/auth/register` | Formulario de registro |
+| Ruta             | Descripción                            |
+| ---------------- | -------------------------------------- |
+| `/auth/login`    | Estructura inicial de inicio de sesión |
+| `/auth/register` | Formulario de registro                 |
 
 ### Scripts disponibles
 
-| Comando | Descripción |
-| --- | --- |
-| `npm start` | Inicia el servidor de desarrollo local |
-| `npm run build` | Genera el build de producción en `dist/` |
+| Comando         | Descripción                                                 |
+| --------------- | ----------------------------------------------------------- |
+| `npm start`     | Inicia el servidor de desarrollo local                      |
+| `npm run build` | Genera el build de producción en `dist/`                    |
 | `npm run watch` | Ejecuta builds continuos con la configuración de desarrollo |
-| `npm test` | Ejecuta las pruebas unitarias con Angular y Vitest |
+| `npm test`      | Ejecuta las pruebas unitarias con Angular y Vitest          |
 
 ### Estructura del proyecto
 
