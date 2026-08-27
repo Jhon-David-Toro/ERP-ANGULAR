@@ -66,7 +66,7 @@ export class UserService{
         this.currentUserId = userId;
     }
 
-    async getCurrentUserProfile(): Promise<User | null>{
+    async getCurrentUserProfile(): Promise<PublicUser | null>{
         if (!this.currentUserId) {
             return null;
         }
@@ -74,10 +74,17 @@ export class UserService{
         return this.getUserById(this.currentUserId);
     }
 
-    async getUserById(userId: string): Promise<User | null>{
+    async getUserById(userId: string): Promise<PublicUser | null>{
         const foundUser = this.users.find((user) => user.id === userId);
 
-        return foundUser ?? null;
+        if (!foundUser) {
+            return null;
+        }
+
+        const { password: _password, ...publicUser } = foundUser;
+        void _password;
+
+        return publicUser;
     }
 
     hasCurrentUser(): boolean {
