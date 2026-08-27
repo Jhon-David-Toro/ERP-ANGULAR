@@ -1,4 +1,5 @@
 import { v7 as uuidv7 } from 'uuid';
+import { Country } from './country.model';
 
 export type UserRole = 'admin' | 'seller';
 
@@ -28,6 +29,7 @@ export interface RegisterDTO{
     first_name: string;
     last_name: string,
     email: string,
+    country: Country,
     phone_number: number,
-    password: string
+    password: string,
 }
