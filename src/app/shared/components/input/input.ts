@@ -1,13 +1,5 @@
-import {
-  ChangeDetectionStrategy,
-  Component,
-  forwardRef,
-  input,
-} from '@angular/core';
-import {
-  ControlValueAccessor,
-  NG_VALUE_ACCESSOR,
-} from '@angular/forms';
+import { ChangeDetectionStrategy, Component, forwardRef, input } from '@angular/core';
+import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 
 @Component({
   changeDetection: ChangeDetectionStrategy.OnPush,
@@ -18,9 +10,9 @@ import {
     {
       provide: NG_VALUE_ACCESSOR,
       useExisting: forwardRef(() => Input),
-      multi: true,
-    },
-  ],
+      multi: true
+    }
+  ]
 })
 export class Input implements ControlValueAccessor {
   readonly id = input.required<string>();
@@ -40,8 +32,8 @@ export class Input implements ControlValueAccessor {
   value = '';
   disabled = false;
 
-  private onChange: (value: string) => void = () => {};
-  private onTouched: () => void = () => {};
+  private onChange: (value: string) => void = () => undefined;
+  private onTouched: () => void = () => undefined;
 
   writeValue(value: string | null): void {
     this.value = value ?? '';

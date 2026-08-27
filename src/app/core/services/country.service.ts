@@ -32,7 +32,7 @@ export class CountryService {
       code: country.name,
       name: country.name,
       flagUrl: country.flag ?? '',
-      dialCode,
+      dialCode
     };
   }
 

@@ -22,20 +22,20 @@
       (blur)="handleBlur()"
     />
     @if (icon()) {
-    <span class="field__prefix" aria-hidden="true">
-      <img [src]="icon()" alt="" />
-    </span>
+      <span class="field__prefix" aria-hidden="true">
+        <img [src]="icon()" alt="" />
+      </span>
     }
     <ng-content></ng-content>
   </span>
 
   @if (invalid() && error()) {
-  <p class="field__error" [id]="id() + '-error'" role="alert">
-    {{ error() }}
-  </p>
+    <p class="field__error" [id]="id() + '-error'" role="alert">
+      {{ error() }}
+    </p>
   }
 
   @if (hint()) {
-  <p class="field__hint" [id]="id() + '-hint'">{{ hint() }}</p>
+    <p class="field__hint" [id]="id() + '-hint'">{{ hint() }}</p>
   }
 </label>

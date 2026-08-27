@@ -1,7 +1,7 @@
 @use 'styles/utils' as *;
 
 .signup {
-  background-color: #1F1F1F;
+  background-color: #1f1f1f;
   height: 100dvh;
   display: flex;
   justify-content: center;
@@ -24,7 +24,7 @@
   }
 }
 
-.hero{
+.hero {
   max-width: pxToRem(498px);
   display: flex;
   justify-content: center;
@@ -46,7 +46,7 @@
     margin: 0;
 
     @include media-xs() {
-     font-size: 24px;
+      font-size: 24px;
     }
   }
 
@@ -59,7 +59,7 @@
     text-align: center;
 
     @include media-xs() {
-     font-size: 16px;
+      font-size: 16px;
     }
   }
 
@@ -68,7 +68,7 @@
     max-width: 100%;
     transition: filter 300ms ease;
     height: auto;
-    
+
     @include image-motion;
 
     &:hover {
@@ -133,7 +133,7 @@
     display: grid;
     grid-template-columns: repeat(2, minmax(0, 1fr));
     gap: pxToRem(12px);
-    
+
     @include media-xs() {
       grid-template-columns: 1fr;
     }
@@ -170,7 +170,10 @@
     font-size: pxToRem(14px);
     font-weight: 600;
     cursor: pointer;
-    transition: background-color 200ms ease, box-shadow 200ms ease, transform 200ms ease;
+    transition:
+      background-color 200ms ease,
+      box-shadow 200ms ease,
+      transform 200ms ease;
 
     &:hover:not(:disabled) {
       background-color: #4f4c52;
@@ -206,7 +209,9 @@
     color: #111;
     text-decoration: underline;
     text-underline-offset: pxToRem(3px);
-    transition: color 200ms ease, text-underline-offset 200ms ease;
+    transition:
+      color 200ms ease,
+      text-underline-offset 200ms ease;
 
     &:hover {
       color: #6d6a70;
@@ -251,7 +256,9 @@
   background: transparent;
   color: #777;
   cursor: pointer;
-  transition: color 200ms ease, transform 200ms ease;
+  transition:
+    color 200ms ease,
+    transform 200ms ease;
 
   &:hover {
     color: #111;
