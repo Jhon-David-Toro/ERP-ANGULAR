@@ -17,7 +17,7 @@ export class UserService{
 
     private currentUserId: string | null = null;
 
-    async createUser(userData: RegisterDTO): Promise<User>{
+    async createUser(userData: RegisterDTO): Promise<PublicUser>{
         const now = new Date().toISOString();
         const newUser: User = {
             id: uuidv7(),
@@ -35,7 +35,9 @@ export class UserService{
 
         this.users.push(newUser);
 
-        return newUser;
+        const { password, ...publicUser } = newUser;
+
+        return publicUser;
     }
 
     async login(credentials: LoginDTO): Promise<PublicUser | null> {
@@ -72,13 +74,13 @@ export class UserService{
     }
 
     async getUserById(userId: string): Promise<User | null>{
-        const user_find = this.users.find((user_find) => user_find.id === userId);
+        const foundUser = this.users.find((user) => user.id === userId);
 
-        return user_find ?? null;
+        return foundUser ?? null;
     }
 
     hasCurrentUser(): boolean {
-        return this.currentUserId !== null;
+        return this.currentUserId !== null && this.users.some((user) => user.id === this.currentUserId);
     }
 
 }
