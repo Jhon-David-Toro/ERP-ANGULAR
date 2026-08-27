@@ -1,11 +1,7 @@
 import { CommonModule, NgOptimizedImage } from '@angular/common';
 import { Component, computed, inject, OnInit, signal } from '@angular/core';
-import {
-  FormBuilder,
-  ReactiveFormsModule,
-  Validators,
-} from '@angular/forms';
-import { RouterLink } from "@angular/router";
+import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
+import { RouterLink } from '@angular/router';
 import { Country } from '../../core/models/country.model';
 import { CountryService } from '../../core/services/country.service';
 import { CountrySelector } from '../../shared/components/country-selector/country-selector';
@@ -14,10 +10,18 @@ import { Spinner } from '../../shared/components/spinner/spinner';
 import { matchingPasswordValidator } from '../../shared/validators/matching-password.validator';
 
 @Component({
-  imports: [CommonModule, CountrySelector, Input, NgOptimizedImage, ReactiveFormsModule, RouterLink, Spinner],
+  imports: [
+    CommonModule,
+    CountrySelector,
+    Input,
+    NgOptimizedImage,
+    ReactiveFormsModule,
+    RouterLink,
+    Spinner
+  ],
   selector: 'app-register',
   styleUrl: './register.scss',
-  templateUrl: './register.html',
+  templateUrl: './register.html'
 })
 export class Register implements OnInit {
   private readonly formBuild = inject(FormBuilder);
@@ -31,9 +35,7 @@ export class Register implements OnInit {
   readonly countriesLoading = signal(true);
   readonly countriesLoadError = signal(false);
 
-  readonly passwordInputType = computed(() =>
-    this.showPassword() ? 'text' : 'password'
-  );
+  readonly passwordInputType = computed(() => (this.showPassword() ? 'text' : 'password'));
 
   readonly passwordAriaLabel = computed(() =>
     this.showPassword() ? 'Ocultar contraseña' : 'Mostrar contraseña'
@@ -50,27 +52,27 @@ export class Register implements OnInit {
       [
         Validators.required,
         Validators.minLength(8),
-        Validators.pattern(/^(?=.*[A-Za-z])(?=.*\d)(?=.*[^A-Za-z0-9]).+$/),
-      ],
+        Validators.pattern(/^(?=.*[A-Za-z])(?=.*\d)(?=.*[^A-Za-z0-9]).+$/)
+      ]
     ],
     confirmPassword: ['', [Validators.required, matchingPasswordValidator]],
 
     terms: [false, Validators.requiredTrue],
-    marketing: [false],
+    marketing: [false]
   });
 
-  private readonly genericErrors: Record<string, (error?: any) => string> = {
-    required: () => 'Este campo es obligatorio',
-    email: () => 'Ingresa un correo electrónico válido',
-    minlength: (error) =>
-      `Debe tener al menos ${error.requiredLength} caracteres`,
-    pattern: () => 'Formato inválido',
-  };
+  private readonly genericErrors: Record<string, (error?: { requiredLength?: number }) => string> =
+    {
+      required: () => 'Este campo es obligatorio',
+      email: () => 'Ingresa un correo electrónico válido',
+      minlength: (error) => `Debe tener al menos ${error?.requiredLength ?? 0} caracteres`,
+      pattern: () => 'Formato inválido'
+    };
 
   ngOnInit(): void {
     this.form.controls.password.valueChanges.subscribe(() => {
       this.form.controls.confirmPassword.updateValueAndValidity({
-        emitEvent: false,
+        emitEvent: false
       });
     });
 
@@ -82,23 +84,23 @@ export class Register implements OnInit {
       error: () => {
         this.countriesLoadError.set(true);
         this.countriesLoading.set(false);
-      },
+      }
     });
   }
-  
+
   private readonly fieldErrors: Record<string, Record<string, string>> = {
     phone: {
-      pattern: 'Ingresa un número de celular válido',
+      pattern: 'Ingresa un número de celular válido'
     },
     password: {
-      pattern: 'La contraseña debe incluir letras, números y símbolos',
+      pattern: 'La contraseña debe incluir letras, números y símbolos'
     },
     confirmPassword: {
-      passwordMismatch: 'Las contraseñas no coinciden',
+      passwordMismatch: 'Las contraseñas no coinciden'
     },
     terms: {
-      required: 'Debes aceptar los términos y condiciones',
-    },
+      required: 'Debes aceptar los términos y condiciones'
+    }
   };
 
   togglePassword(): void {
@@ -166,7 +168,7 @@ export class Register implements OnInit {
       countryCode: value.countryCode,
       password: value.password,
       terms: value.terms,
-      marketing: value.marketing,
+      marketing: value.marketing
     };
   }
 }
