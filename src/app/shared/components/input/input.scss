@@ -24,7 +24,9 @@
     outline: none;
     font-size: pxToRem(14px);
     box-sizing: border-box;
-    transition: border-color 200ms ease, box-shadow 200ms ease;
+    transition:
+      border-color 200ms ease,
+      box-shadow 200ms ease;
 
     &:hover:not(:focus) {
       border-color: #999;
@@ -39,7 +41,7 @@
       outline: none;
     }
 
-    &[aria-invalid="true"] {
+    &[aria-invalid='true'] {
       border-color: #d32f2f;
     }
   }

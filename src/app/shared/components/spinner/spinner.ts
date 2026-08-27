@@ -4,7 +4,7 @@ import { ChangeDetectionStrategy, Component, input } from '@angular/core';
   changeDetection: ChangeDetectionStrategy.OnPush,
   selector: 'app-spinner',
   templateUrl: './spinner.html',
-  styleUrl: './spinner.scss',
+  styleUrl: './spinner.scss'
 })
 export class Spinner {
   readonly size = input<'xs' | 'sm' | 'md' | 'lg' | 'xl'>('md');
