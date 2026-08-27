@@ -1,220 +1,214 @@
 <main class="signup" aria-labelledby="Registro">
-    <section class="hero">
-        <h2 class="hero__title">Únete a nosotros</h2>
-        <p class="hero__descripcion">
-            Access to thousands of design resources and templates
-        </p>
+  <section class="hero">
+    <h2 class="hero__title">Únete a nosotros</h2>
+    <p class="hero__descripcion">Access to thousands of design resources and templates</p>
 
-        <div class="hero__image-container">
-            @if (!imageLoaded()) {
-                <app-spinner size="xl" />
-            }
+    <div class="hero__image-container">
+      @if (!imageLoaded()) {
+        <app-spinner size="xl" />
+      }
 
-            <img
-                class="hero__image"
-                ngSrc="https://res.cloudinary.com/dxspvj1rj/image/upload/v1787798781/Illustration_a4sjkh.png"
-                width="538"
-                height="538"
-                priority
-                alt="Ilustracion de bienvenida"
-                [class.hero__image--loading]="!imageLoaded()"
-                (load)="imageLoaded.set(true)"
-            />
-        </div>
+      <img
+        class="hero__image"
+        ngSrc="https://res.cloudinary.com/dxspvj1rj/image/upload/v1787798781/Illustration_a4sjkh.png"
+        width="538"
+        height="538"
+        priority
+        alt="Ilustracion de bienvenida"
+        [class.hero__image--loading]="!imageLoaded()"
+        (load)="imageLoaded.set(true)"
+      />
+    </div>
+  </section>
+
+  <form class="form" [formGroup]="form" (ngSubmit)="onSubmitForm()" novalidate>
+    <h2 id="Registro" class="form__title">Regístrate ahora</h2>
+
+    <fieldset class="form__row">
+      <legend class="sr-only">Nombre completo</legend>
+
+      <app-input
+        id="firstName"
+        label="Nombres"
+        autocomplete="given-name"
+        icon="icons/user.svg"
+        formControlName="firstName"
+        [describedBy]="'firstName-error'"
+        [placeholder]="'Escribe tus nombres'"
+        [invalid]="isInvalid('firstName')"
+        [error]="getError('firstName')"
+      />
+
+      <app-input
+        id="lastName"
+        label="Apellidos"
+        autocomplete="family-name"
+        icon="icons/user.svg"
+        formControlName="lastName"
+        [describedBy]="'lastName-error'"
+        [placeholder]="'Escribe tus apellidos'"
+        [invalid]="isInvalid('lastName')"
+        [error]="getError('lastName')"
+      />
+    </fieldset>
+
+    <app-input
+      id="email"
+      label="Correo electrónico"
+      type="email"
+      autocomplete="email"
+      formControlName="email"
+      [placeholder]="'Escribe tu correo electrónico'"
+      icon="icons/mail.svg"
+      [describedBy]="'email-error'"
+      [invalid]="isInvalid('email')"
+      [error]="getError('email')"
+    />
+
+    <section class="form__phone-row">
+      <app-country-selector
+        formControlName="countryCode"
+        [countries]="countries()"
+        [loading]="countriesLoading()"
+        [invalid]="isInvalid('countryCode') || countriesLoadError()"
+        [error]="
+          countriesLoadError() ? 'No se pudieron cargar los países' : getError('countryCode')
+        "
+      />
+
+      <app-input
+        id="phone"
+        label="Número de celular"
+        type="tel"
+        inputMode="tel"
+        autocomplete="tel"
+        [placeholder]="'Dígita tu número'"
+        icon="icons/phone.svg"
+        formControlName="phone"
+        [required]="true"
+        [describedBy]="'phone-error'"
+        [invalid]="isInvalid('phone')"
+        [error]="getError('phone')"
+      />
     </section>
 
-    <form
-        class="form"
-        [formGroup]="form"
-        (ngSubmit)="onSubmitForm()"
-        novalidate
-    >
-        <h2 id="Registro" class="form__title">Regístrate ahora</h2>
+    <fieldset class="form__row form__password-row">
+      <legend class="sr-only">Contraseña y confirmación</legend>
 
-        <fieldset class="form__row">
-            <legend class="sr-only">Nombre completo</legend>
+      <app-input
+        id="password"
+        label="Contraseña"
+        [type]="passwordInputType()"
+        autocomplete="new-password"
+        icon="icons/lock.svg"
+        formControlName="password"
+        [required]="true"
+        [hasSuffix]="true"
+        [placeholder]="'Confirmar'"
+        [describedBy]="'password-hint password-error'"
+        [invalid]="isInvalid('password')"
+        [error]="getError('password')"
+      >
+        <button
+          class="password__toggle"
+          type="button"
+          [attr.aria-label]="passwordAriaLabel()"
+          [attr.aria-pressed]="showPassword()"
+          (click)="togglePassword()"
+        >
+          <img
+            class="password__icon"
+            [src]="showPassword() ? 'icons/eye.svg' : 'icons/eye-off.svg'"
+            alt=""
+            aria-hidden="true"
+          />
+        </button>
+      </app-input>
 
-            <app-input
-                id="firstName"
-                label="Nombres"
-                autocomplete="given-name"
-                icon="icons/user.svg"
-                formControlName="firstName"
-                [describedBy]="'firstName-error'"
-                [placeholder]="'Escribe tus nombres'"
-                [invalid]="isInvalid('firstName')"
-                [error]="getError('firstName')"
-            />
+      <app-input
+        id="confirmPassword"
+        label="Repetir contraseña"
+        [type]="passwordInputType()"
+        autocomplete="new-password"
+        icon="icons/lock.svg"
+        formControlName="confirmPassword"
+        [required]="true"
+        [hasSuffix]="true"
+        [placeholder]="'Confirmar'"
+        [describedBy]="'confirmPassword-error'"
+        [invalid]="isInvalid('confirmPassword')"
+        [error]="getError('confirmPassword')"
+      >
+        <button
+          class="password__toggle"
+          type="button"
+          [attr.aria-label]="passwordAriaLabel()"
+          [attr.aria-pressed]="showPassword()"
+          (click)="togglePassword()"
+        >
+          <img
+            class="password__icon"
+            [src]="showPassword() ? 'icons/eye.svg' : 'icons/eye-off.svg'"
+            alt=""
+            aria-hidden="true"
+          />
+        </button>
+      </app-input>
+    </fieldset>
 
-            <app-input
-                id="lastName"
-                label="Apellidos"
-                autocomplete="family-name"
-                icon="icons/user.svg"
-                formControlName="lastName"
-                [describedBy]="'lastName-error'"
-                [placeholder]="'Escribe tus apellidos'"
-                [invalid]="isInvalid('lastName')"
-                [error]="getError('lastName')"
-            />
-        </fieldset>
+    <fieldset class="form__checks">
+      <legend class="sr-only">Consentimientos</legend>
 
-        <app-input
-            id="email"
-            label="Correo electrónico"
-            type="email"
-            autocomplete="email"
-            formControlName="email"
-            [placeholder]="'Escribe tu correo electrónico'"
-            icon="icons/mail.svg"
-            [describedBy]="'email-error'"
-            [invalid]="isInvalid('email')"
-            [error]="getError('email')"
+      <label class="form__check" for="terms">
+        <input
+          type="checkbox"
+          id="terms"
+          formControlName="terms"
+          required
+          aria-describedby="terms-error"
+          [attr.aria-invalid]="isInvalid('terms')"
         />
 
-        <section class="form__phone-row">
-            <app-country-selector
-                formControlName="countryCode"
-                [countries]="countries()"
-                [loading]="countriesLoading()"
-                [invalid]="isInvalid('countryCode') || countriesLoadError()"
-                [error]="countriesLoadError() ? 'No se pudieron cargar los países' : getError('countryCode')"
-            />
+        <span>
+          Al crear una cuenta, acepto los
+          <a href="#">Términos de uso</a>
+          y la
+          <a href="#">Política de privacidad</a>.
+        </span>
+      </label>
 
-            <app-input
-                id="phone"
-                label="Número de celular"
-                type="tel"
-                inputMode="tel"
-                autocomplete="tel"
-                [placeholder]="'Dígita tu número'"
-                icon="icons/phone.svg"
-                formControlName="phone"
-                [required]="true"
-                [describedBy]="'phone-error'"
-                [invalid]="isInvalid('phone')"
-                [error]="getError('phone')"
-            />
-        </section>
+      <p class="form__error" id="terms-error" [hidden]="!isInvalid('terms')">
+        {{ getError('terms') }}
+      </p>
 
-        <fieldset class="form__row form__password-row">
-            <legend class="sr-only">Contraseña y confirmación</legend>
+      <label class="form__check" for="marketing">
+        <input type="checkbox" id="marketing" formControlName="marketing" />
 
-            <app-input
-                id="password"
-                label="Contraseña"
-                [type]="passwordInputType()"
-                autocomplete="new-password"
-                icon="icons/lock.svg"
-                formControlName="password"
-                [required]="true"
-                [hasSuffix]="true"
-                [placeholder]="'Confirmar'"
-                [describedBy]="'password-hint password-error'"
-                [invalid]="isInvalid('password')"
-                [error]="getError('password')"
-            >
-            <button
-                class="password__toggle"
-                type="button"
-                [attr.aria-label]="passwordAriaLabel()"
-                [attr.aria-pressed]="showPassword()"
-                (click)="togglePassword()"
-            >
-                <img
-                    class="password__icon"
-                    [src]="showPassword() ? 'icons/eye.svg' : 'icons/eye-off.svg'"
-                    alt=""
-                    aria-hidden="true"
-                />
-            </button>
-            </app-input>
+        <span>
+          También acepto recibir mensajes SMS y correos electrónicos con novedades, eventos y
+          promociones.
+        </span>
+      </label>
+    </fieldset>
 
-            <app-input
-                id="confirmPassword"
-                label="Repetir contraseña"
-                [type]="passwordInputType()"
-                autocomplete="new-password"
-                icon="icons/lock.svg"
-                formControlName="confirmPassword"
-                [required]="true"
-                [hasSuffix]="true"
-                [placeholder]="'Confirmar'"
-                [describedBy]="'confirmPassword-error'"
-                [invalid]="isInvalid('confirmPassword')"
-                [error]="getError('confirmPassword')"
-            >
-                <button
-                    class="password__toggle"
-                    type="button"
-                    [attr.aria-label]="passwordAriaLabel()"
-                    [attr.aria-pressed]="showPassword()"
-                    (click)="togglePassword()"
-                >
-                    <img
-                        class="password__icon"
-                        [src]="showPassword() ? 'icons/eye.svg' : 'icons/eye-off.svg'"
-                        alt=""
-                        aria-hidden="true"
-                    />
-                </button>
-            </app-input>
+    <footer class="form__footer">
+      <button
+        class="form__submit"
+        type="submit"
+        [disabled]="isSubmitting()"
+        [attr.aria-busy]="isSubmitting()"
+      >
+        @if (isSubmitting()) {
+          <app-spinner size="sm" />
+        } @else {
+          Registrarse
+        }
+      </button>
 
-        </fieldset>
-    
-        <fieldset class="form__checks">
-            <legend class="sr-only">Consentimientos</legend>
-
-            <label class="form__check" for="terms">
-                <input
-                    type="checkbox"
-                    id="terms"
-                    formControlName="terms"
-                    required
-                    aria-describedby="terms-error"
-                    [attr.aria-invalid]="isInvalid('terms')"
-                />
-
-                <span>
-                    Al crear una cuenta, acepto los
-                    <a href="#">Términos de uso</a>
-                    y la
-                    <a href="#">Política de privacidad</a>.
-                </span>
-            </label>
-
-            <p class="form__error" id="terms-error" [hidden]="!isInvalid('terms')">
-                {{ getError('terms') }}
-            </p>
-
-            <label class="form__check" for="marketing">
-                <input type="checkbox" id="marketing" formControlName="marketing" />
-
-                <span>
-                    También acepto recibir mensajes SMS y correos electrónicos con
-                    novedades, eventos y promociones.
-                </span>
-            </label>
-        </fieldset>
-
-        <footer class="form__footer">
-            <button
-                class="form__submit"
-                type="submit"
-                [disabled]="isSubmitting()"
-                [attr.aria-busy]="isSubmitting()"
-            >
-                @if (isSubmitting()) {
-                    <app-spinner size="sm" />
-                } @else {
-                    Registrarse
-                }
-            </button>
-
-            <p class="form__login">
-                ¿Ya tienes una cuenta?
-                <a routerLink="/auth/login">Inicia sesión</a>
-            </p>
-        </footer>
-    </form>
+      <p class="form__login">
+        ¿Ya tienes una cuenta?
+        <a routerLink="/auth/login">Inicia sesión</a>
+      </p>
+    </footer>
+  </form>
 </main>

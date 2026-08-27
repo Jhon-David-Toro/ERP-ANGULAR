@@ -30,10 +30,12 @@
     color: #333;
     text-align: left;
     cursor: pointer;
-    transition: border-color 200ms ease, box-shadow 200ms ease;
+    transition:
+      border-color 200ms ease,
+      box-shadow 200ms ease;
 
     &:hover:not(:disabled),
-    &[aria-expanded="true"] {
+    &[aria-expanded='true'] {
       border-color: #6d6a70;
       box-shadow: 0 0 0 pxToRem(2px) rgba(109, 106, 112, 0.14);
     }
@@ -56,10 +58,12 @@
     border-right: pxToRem(2px) solid #777;
     border-bottom: pxToRem(2px) solid #777;
     transform: rotate(45deg) translateY(pxToRem(-2px));
-    transition: border-color 200ms ease, transform 200ms ease;
+    transition:
+      border-color 200ms ease,
+      transform 200ms ease;
   }
 
-  &__trigger[aria-expanded="true"] .country-selector__chevron {
+  &__trigger[aria-expanded='true'] .country-selector__chevron {
     border-color: #6d6a70;
     transform: rotate(225deg) translateY(pxToRem(-2px));
   }
@@ -143,7 +147,7 @@
     cursor: pointer;
 
     &:hover,
-    &[aria-selected="true"] {
+    &[aria-selected='true'] {
       background: #f1eff3;
     }
   }

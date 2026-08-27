@@ -7,7 +7,7 @@ import {
   HostListener,
   inject,
   input,
-  signal,
+  signal
 } from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 import { Country } from '../../../core/models/country.model';
@@ -21,9 +21,9 @@ import { Country } from '../../../core/models/country.model';
     {
       provide: NG_VALUE_ACCESSOR,
       useExisting: forwardRef(() => CountrySelector),
-      multi: true,
-    },
-  ],
+      multi: true
+    }
+  ]
 })
 export class CountrySelector implements ControlValueAccessor {
   private readonly elementRef = inject(ElementRef<HTMLElement>);
@@ -52,8 +52,8 @@ export class CountrySelector implements ControlValueAccessor {
     );
   });
 
-  private onChange: (value: string) => void = () => {};
-  private onTouched: () => void = () => {};
+  private onChange: (value: string) => void = () => undefined;
+  private onTouched: () => void = () => undefined;
 
   writeValue(value: string | null): void {
     this.value.set(value ?? '');
@@ -94,10 +94,7 @@ export class CountrySelector implements ControlValueAccessor {
 
   @HostListener('document:click', ['$event'])
   closeOnOutsideClick(event: MouseEvent): void {
-    if (
-      this.isOpen() &&
-      !this.elementRef.nativeElement.contains(event.target as Node)
-    ) {
+    if (this.isOpen() && !this.elementRef.nativeElement.contains(event.target as Node)) {
       this.close();
     }
   }
