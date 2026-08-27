@@ -4,7 +4,7 @@ import { v7 as uuidv7 } from 'uuid';
 import {
     User,
     // UserRole,
-    // LoginDTO,
+    LoginDTO,
     RegisterDTO
 } from '../models/user.model';
 
@@ -24,6 +24,7 @@ export class UserService{
             last_name: userData.last_name,
             email: userData.email,
             role: 'seller',
+            country: userData.country,
             phone_number: userData.phone_number,
             password: userData.password,
             is_active: true,
@@ -34,6 +35,20 @@ export class UserService{
         this.users.push(newUser);
 
         return newUser;
+    }
+
+    async login(credentials: LoginDTO): Promise<User | null> {
+        const user_find = this.users.find(
+            (user_find) => ((user_find.email === credentials.email) && (user_find.password === credentials.password))
+        );
+
+        if (!user_find) {
+            return null;
+        }
+
+        this.setCurrentUser(user_find.id);
+
+        return user_find;
     }
 
     async getUsers(): Promise<User[]>{
@@ -56,6 +71,10 @@ export class UserService{
         const user_find = this.users.find((user_find) => user_find.id === userId);
 
         return user_find ?? null;
+    }
+
+    hasCurrentUser(): boolean {
+        return this.currentUserId !== null;
     }
 
 }

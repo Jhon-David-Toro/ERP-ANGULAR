@@ -9,6 +9,7 @@ export interface User {
     last_name: string,
     email: string,
     role: UserRole,
+    country: Country,
     phone_number: number,
     password: string,
     is_active: boolean,
