@@ -17,6 +17,8 @@ export interface User {
     updated_at: string
 }
 
+export type PublicUser = Omit<User, 'password'>;
+
 export const createUserId = (): string => { 
     return uuidv7();
 }

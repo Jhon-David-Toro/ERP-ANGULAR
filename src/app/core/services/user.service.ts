@@ -1,8 +1,9 @@
-import { Injectable } from "@angular/core";
+import { Injectable } from '@angular/core';
 import { v7 as uuidv7 } from 'uuid';
 
 import {
     User,
+    PublicUser,
     // UserRole,
     LoginDTO,
     RegisterDTO
@@ -37,18 +38,20 @@ export class UserService{
         return newUser;
     }
 
-    async login(credentials: LoginDTO): Promise<User | null> {
-        const user_find = this.users.find(
-            (user_find) => ((user_find.email === credentials.email) && (user_find.password === credentials.password))
+    async login(credentials: LoginDTO): Promise<PublicUser | null> {
+        const foundUser = this.users.find(
+            (candidateUser) => ((candidateUser.email === credentials.email) && (candidateUser.password === credentials.password))
         );
 
-        if (!user_find) {
+        if (!foundUser) {
             return null;
         }
 
-        this.setCurrentUser(user_find.id);
+        this.setCurrentUser(foundUser.id);
 
-        return user_find;
+        const { password, ...publicUser } = foundUser;
+
+        return publicUser;
     }
 
     async getUsers(): Promise<User[]>{
