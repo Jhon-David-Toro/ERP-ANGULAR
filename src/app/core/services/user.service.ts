@@ -35,7 +35,8 @@ export class UserService{
 
         this.users.push(newUser);
 
-        const { password, ...publicUser } = newUser;
+        const { password: _password, ...publicUser } = newUser;
+        void _password;
 
         return publicUser;
     }
