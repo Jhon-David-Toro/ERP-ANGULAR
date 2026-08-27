@@ -37,7 +37,7 @@
           },
           "configurations": {
             "production": {
-              "baseHref": "/erp-angular/",
+              "baseHref": "/ERP-ANGULAR/",
               "budgets": [
                 {
                   "type": "initial",
