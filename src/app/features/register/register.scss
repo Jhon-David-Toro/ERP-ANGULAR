@@ -8,9 +8,20 @@
   justify-content: center;
   align-items: center;
   gap: pxToRem(24px);
+  overflow: hidden;
+
+  .hero {
+    @include enter;
+  }
+
+  .form {
+    @include enter($delay: 120ms);
+  }
 
   @include media-ltlg() {
     flex-direction: column;
+    height: 100%;
+    padding: pxToRem(32px) 0;
   }
 }
 
@@ -20,18 +31,83 @@
   justify-content: center;
   align-items: center;
   flex-direction: column;
+
+  &__title {
+    @include enter($distance: pxToRem(16px));
+  }
+
+  &__descripcion {
+    @include enter($delay: 100ms, $distance: pxToRem(16px));
+  }
+
   &__title {
     color: white;
     font-size: pxToRem(48px);
     font-weight: 600;
     margin: 0;
+
+    @include media-xs() {
+     font-size: 24px;
+    }
   }
 
   &__descripcion {
     font-size: pxToRem(20px);
     color: white;
     font-weight: 200;
+    width: 100%;
     margin: 0;
+    text-align: center;
+
+    @include media-xs() {
+     font-size: 16px;
+    }
+  }
+
+  &__image {
+    display: block;
+    max-width: 100%;
+    transition: filter 300ms ease;
+    height: auto;
+    
+    @include image-motion;
+
+    &:hover {
+      filter: drop-shadow(0 pxToRem(14px) pxToRem(18px) rgba(255, 255, 255, 0.18));
+    }
+
+    @include media-xs() {
+      max-width: pxToRem(300px);
+    }
+  }
+
+  &__image-container {
+    position: relative;
+    display: grid;
+    place-items: center;
+    min-width: pxToRem(300px);
+    min-height: pxToRem(300px);
+  }
+
+  &__image--loading {
+    opacity: 0;
+  }
+
+  app-spinner {
+    position: absolute;
+    z-index: 1;
+    color: #fff;
+  }
+}
+
+@include reduced-motion {
+  .signup,
+  .signup .hero,
+  .signup .form,
+  .signup .hero__title,
+  .signup .hero__descripcion,
+  .signup .hero__image {
+    animation: none;
   }
 }
 
@@ -79,14 +155,15 @@
     gap: pxToRem(16px);
 
     @include media-xs() {
-      align-items: flex-start;
       flex-direction: column;
+      text-align: center;
     }
   }
 
   &__submit {
     height: pxToRem(48px);
     padding: 0 pxToRem(28px);
+    min-width: pxToRem(140px);
     border: 0;
     border-radius: pxToRem(16px);
     background: #6d6a70;
@@ -94,6 +171,30 @@
     font-size: pxToRem(14px);
     font-weight: 600;
     cursor: pointer;
+    transition: background-color 200ms ease, box-shadow 200ms ease, transform 200ms ease;
+
+    &:hover:not(:disabled) {
+      background-color: #4f4c52;
+      box-shadow: 0 pxToRem(8px) pxToRem(16px) rgba(31, 31, 31, 0.2);
+      transform: translateY(pxToRem(-2px));
+    }
+
+    &:active:not(:disabled) {
+      box-shadow: none;
+      transform: translateY(0);
+    }
+
+    &:disabled {
+      cursor: not-allowed;
+      opacity: 0.65;
+    }
+
+    &:has(app-spinner) {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: pxToRem(10px);
+    }
   }
 
   &__login {
@@ -105,6 +206,18 @@
   a {
     color: #111;
     text-decoration: underline;
+    text-underline-offset: pxToRem(3px);
+    transition: color 200ms ease, text-underline-offset 200ms ease;
+
+    &:hover {
+      color: #6d6a70;
+      text-underline-offset: pxToRem(5px);
+    }
+
+    &:focus-visible {
+      outline: pxToRem(2px) solid #6d6a70;
+      outline-offset: pxToRem(3px);
+    }
   }
 
   @include media-xs() {
@@ -112,113 +225,58 @@
   }
 }
 
-.field {
-  display: block;
-  min-width: 0;
+.form__phone-row {
+  display: grid;
+  grid-template-columns: minmax(pxToRem(220px), 0.8fr) minmax(0, 1.5fr);
+  align-items: start;
+  gap: pxToRem(12px);
+
+  @include media-xs() {
+    grid-template-columns: 1fr;
+    align-items: stretch;
+  }
+}
+
+.form__error {
+  font-size: pxToRem(13px);
+  font-weight: 400;
+  color: #d32f2f;
+}
+
+.password__toggle {
+  position: absolute;
+  top: 50%;
+  right: pxToRem(12px);
+  transform: translateY(-50%);
   border: 0;
-  padding: 0;
-  margin: 0;
+  background: transparent;
+  color: #777;
+  cursor: pointer;
+  transition: color 200ms ease, transform 200ms ease;
 
-  &__error {
-    font-size: pxToRem(13px);
-    font-weight: 400;
-    color: #d32f2f;
-  }
+  &:hover {
+    color: #111;
+    transform: translateY(-50%) scale(1.08);
 
-  &__label {
-    display: block;
-    margin-bottom: pxToRem(6px);
-    color: #666;
-    font-size: pxToRem(13px);
-    font-weight: 400;
-  }
-
-  &__control {
-    width: 100%;
-    height: pxToRem(50px);
-    padding: 0 pxToRem(12px);
-    border: pxToRem(1px) solid #d7d7d7;
-    border-radius: pxToRem(8px);
-    outline: none;
-    font-size: pxToRem(14px);
-    box-sizing: border-box;
-    transition: border-color 0.2s;
-
-    &:focus {
-      border-color: #111;
-    }
-
-    &[aria-invalid="true"] {
-      border-color: #d32f2f;
+    .password__icon {
+      filter: brightness(0.35);
     }
   }
 
-  &__hint {
-    margin: pxToRem(6px) 0 0;
-    color: #777;
-    font-size: pxToRem(11px);
-    line-height: 1.4;
+  &:focus-visible {
+    outline: pxToRem(2px) solid #6d6a70;
+    outline-offset: pxToRem(3px);
   }
 }
 
-.phone {
-  height: pxToRem(50px);
-  display: flex;
-  align-items: center;
-  border: pxToRem(1px) solid #d7d7d7;
-  border-radius: pxToRem(8px);
-  overflow: hidden;
-  transition: border-color 0.2s;
-
-  &:focus-within {
-    border-color: #111;
-  }
-
-  &--invalid {
-    border-color: #d32f2f;
-  }
-
-  &__prefix {
-    height: 100%;
-    padding: 0 pxToRem(10px);
-    border: 0;
-    outline: 0;
-    background: transparent;
-    font-size: pxToRem(14px);
-  }
-
-  &__number {
-    flex: 1;
-    min-width: 0;
-    height: 100%;
-    padding: 0 pxToRem(12px);
-    border: 0;
-    outline: 0;
-    font-size: pxToRem(14px);
-  }
+.password__icon {
+  display: block;
+  width: pxToRem(20px);
+  height: pxToRem(20px);
+  transition: filter 200ms ease;
 }
 
-.password {
-  position: relative;
-
-  .field__control {
-    padding-right: pxToRem(70px);
-  }
-
-  &__toggle {
-    position: absolute;
-    top: 50%;
-    right: pxToRem(12px);
-    transform: translateY(-50%);
-    border: 0;
-    background: transparent;
-    color: #777;
-    font-size: pxToRem(13px);
-    cursor: pointer;
-  }
-}
-
-.check {
+.form__check {
   display: grid;
   grid-template-columns: auto 1fr;
   gap: pxToRem(10px);

@@ -1,0 +1,61 @@
+@mixin enter($duration: 700ms, $delay: 0ms, $distance: 24px) {
+  --motion-distance: #{$distance};
+  animation: motion-enter $duration cubic-bezier(0.22, 1, 0.36, 1) $delay both;
+}
+
+@mixin reduced-motion {
+  @media (prefers-reduced-motion: reduce) {
+    @content;
+  }
+}
+
+@mixin image-motion($enter-delay: 180ms, $float-delay: 1.1s) {
+  animation:
+    image-enter 900ms cubic-bezier(0.22, 1, 0.36, 1) $enter-delay both,
+    image-float 5s ease-in-out $float-delay infinite;
+}
+
+@mixin spinner-motion {
+  animation: button-spinner 700ms linear infinite;
+}
+
+@keyframes motion-enter {
+  from {
+    opacity: 0;
+    transform: translateY(var(--motion-distance));
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes image-enter {
+  from {
+    opacity: 0;
+    transform: translateY(28px) scale(0.94) rotate(-3deg);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1) rotate(0deg);
+  }
+}
+
+@keyframes image-float {
+  0%,
+  100% {
+    transform: translateY(0) rotate(0deg);
+  }
+
+  50% {
+    transform: translateY(-10px) rotate(1.5deg);
+  }
+}
+
+@keyframes button-spinner {
+  to {
+    transform: rotate(360deg);
+  }
+}

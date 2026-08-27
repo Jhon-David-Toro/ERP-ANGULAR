@@ -1,0 +1,90 @@
+@use '../../../styles/functions' as *;
+
+.spinner {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: pxToRem(10px);
+  color: currentColor;
+
+  &__ring {
+    display: block;
+    width: pxToRem(24px);
+    height: pxToRem(24px);
+    border: pxToRem(3px) solid currentColor;
+    border-right-color: transparent;
+    border-radius: 50%;
+    animation: spinner-rotate 700ms linear infinite;
+  }
+
+  &__label {
+    font-size: pxToRem(14px);
+  }
+
+  &--xs,
+  &--sm {
+    gap: 0;
+
+    .spinner__ring {
+      width: pxToRem(20px);
+      height: pxToRem(20px);
+      border-width: pxToRem(2px);
+    }
+
+    .spinner__label {
+      position: absolute;
+      width: pxToRem(1px);
+      height: pxToRem(1px);
+      overflow: hidden;
+      clip-path: inset(50%);
+      white-space: nowrap;
+    }
+  }
+
+  &--xs {
+    .spinner__ring {
+      width: pxToRem(16px);
+      height: pxToRem(16px);
+    }
+  }
+
+  &--lg {
+    gap: pxToRem(12px);
+
+    .spinner__ring {
+      width: pxToRem(40px);
+      height: pxToRem(40px);
+      border-width: pxToRem(4px);
+    }
+
+    .spinner__label {
+      font-size: pxToRem(16px);
+    }
+  }
+
+  &--xl {
+    gap: pxToRem(16px);
+
+    .spinner__ring {
+      width: pxToRem(56px);
+      height: pxToRem(56px);
+      border-width: pxToRem(5px);
+    }
+
+    .spinner__label {
+      font-size: pxToRem(18px);
+    }
+  }
+}
+
+@keyframes spinner-rotate {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .spinner__ring {
+    animation: none;
+  }
+}

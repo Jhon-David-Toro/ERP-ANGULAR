@@ -1,0 +1,12 @@
+<span
+  class="spinner"
+  [class.spinner--xs]="size() === 'xs'"
+  [class.spinner--sm]="size() === 'sm'"
+  [class.spinner--lg]="size() === 'lg'"
+  [class.spinner--xl]="size() === 'xl'"
+  role="status"
+  [attr.aria-label]="label()"
+>
+  <span class="spinner__ring" aria-hidden="true"></span>
+  <span class="spinner__label">{{ label() }}</span>
+</span>

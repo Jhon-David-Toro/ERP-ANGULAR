@@ -1,0 +1,41 @@
+<label class="field" [attr.for]="id()">
+  <span class="field__label">{{ label() }}</span>
+
+  <span class="field__control-wrapper">
+    <input
+      class="field__control"
+      [class.field__control--with-prefix]="icon()"
+      [class.field__control--with-suffix]="hasSuffix()"
+      [type]="type()"
+      [id]="id()"
+      [value]="value"
+      [disabled]="disabled"
+      [required]="required()"
+      [placeholder]="placeholder()"
+      [ariaPlaceholder]="placeholder()"
+      [autocomplete]="autocomplete()"
+      [attr.inputmode]="inputMode()"
+      [attr.aria-describedby]="describedBy()"
+      [attr.aria-invalid]="invalid()"
+      [attr.aria-errormessage]="invalid() ? id() + '-error' : null"
+      (input)="handleInput($event)"
+      (blur)="handleBlur()"
+    />
+    @if (icon()) {
+    <span class="field__prefix" aria-hidden="true">
+      <img [src]="icon()" alt="" />
+    </span>
+    }
+    <ng-content></ng-content>
+  </span>
+
+  @if (invalid() && error()) {
+  <p class="field__error" [id]="id() + '-error'" role="alert">
+    {{ error() }}
+  </p>
+  }
+
+  @if (hint()) {
+  <p class="field__hint" [id]="id() + '-hint'">{{ hint() }}</p>
+  }
+</label>

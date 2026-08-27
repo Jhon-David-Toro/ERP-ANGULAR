@@ -1,0 +1,62 @@
+<div class="country-selector" [class.country-selector--invalid]="invalid()">
+  <span class="country-selector__label">País</span>
+
+  <button
+    class="country-selector__trigger"
+    type="button"
+    [disabled]="disabled() || loading()"
+    [attr.aria-expanded]="isOpen()"
+    aria-haspopup="listbox"
+    aria-label="Seleccionar país"
+    (click)="toggle()"
+  >
+    @if (selectedCountry(); as country) {
+    <img class="country-selector__flag" [src]="country.flagUrl" [alt]="country.name" />
+    <span>{{ country.name }} {{ country.dialCode }}</span>
+    } @else {
+    <span class="country-selector__placeholder">Selecciona un país</span>
+    }
+    <span class="country-selector__chevron" aria-hidden="true"></span>
+  </button>
+
+  @if (isOpen()) {
+  <div class="country-selector__panel" role="dialog" aria-label="Buscar país">
+    <label class="country-selector__search">
+      <img src="/icons/search.svg" alt="" aria-hidden="true" />
+      <input
+        type="search"
+        placeholder="Buscar país o código"
+        aria-label="Buscar país o código"
+        [value]="searchTerm()"
+        (input)="updateSearch($event)"
+      />
+    </label>
+
+    <p class="country-selector__count">
+      {{ filteredCountries().length }} países disponibles
+    </p>
+
+    <div class="country-selector__list" role="listbox">
+      @for (country of filteredCountries(); track country.code + country.dialCode) {
+      <button
+        class="country-selector__option"
+        type="button"
+        role="option"
+        [attr.aria-selected]="country.dialCode === value()"
+        (click)="selectCountry(country)"
+      >
+        <img class="country-selector__flag" [src]="country.flagUrl" [alt]="country.name" />
+        <span class="country-selector__name">{{ country.name }}</span>
+        <span class="country-selector__code">{{ country.dialCode }}</span>
+      </button>
+      } @empty {
+      <p class="country-selector__empty">No encontramos ese país.</p>
+      }
+    </div>
+  </div>
+  }
+
+  @if (invalid() && error()) {
+  <p class="country-selector__error" role="alert">{{ error() }}</p>
+  }
+</div>
