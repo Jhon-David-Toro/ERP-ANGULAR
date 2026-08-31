@@ -1,8 +1,8 @@
 import { Component } from '@angular/core';
-import { Header } from '../../shared/components/header/header';
+import { Navbar } from '../../shared/components/navbar/navbar';
 
 @Component({
-  imports: [Header],
+  imports: [Navbar],
   selector: 'app-landing-page',
   styleUrl: './landing-page.scss',
   templateUrl: './landing-page.html'
