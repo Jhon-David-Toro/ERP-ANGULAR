@@ -1,0 +1,8 @@
+<a
+    class="btn"
+    [class]="'btn--' + variant()"
+    [routerLink]="routerLink() || null"
+    [href]="routerLink() ? null : href()"
+>
+    <ng-content />
+</a>
