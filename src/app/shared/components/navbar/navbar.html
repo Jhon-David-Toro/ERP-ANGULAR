@@ -1,5 +1,16 @@
-<header class="header">
-  <span class="header__logo">Mini ERP🙈</span>
-  <a routerLink="/auth/login">Iniciar sesión</a>
-  <a routerLink="/auth/register">Crear cuenta</a>
+<header class="navbar">
+  <span class="navbar__logo">Mini ERP🙈</span>
+
+  <nav class="navbar__links">
+    <a class="navbar__link" href="">Producto</a>
+    <a class="navbar__link" href="">Soluciones</a>
+    <a class="navbar__link" href="">Precios</a>
+    <a class="navbar__link" href="">Recursos</a>
+  </nav>
+
+  <div class="navbar__actions">
+    <a class="navbar__login" routerLink="/auth/login">Iniciar sesión</a>
+    <app-button variant="primary" routerLink="/auth/register">Crear cuenta</app-button>
+  </div>
+
 </header>

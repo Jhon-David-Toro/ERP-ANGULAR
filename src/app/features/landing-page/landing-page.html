@@ -2,9 +2,52 @@
 
 <main class="landing" aria-labelledby="Página inicial">
     <section class="hero">
-        <h2 id="hero__title">Gestiona tu negocio en un solo lugar</h2>
-        <p class="hero__description">
-            Controla inventario, ventas y usuarios desde una sola plataforma.
-        </p>
+        <div class="hero__content">
+            <app-chip>
+                <svg icon width="14" height="14" viewBox="0 0 24 24" fill="currentColor">
+                    <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z" />
+                </svg>
+                ERP moderno para operaciones ágiles
+            </app-chip>
+
+            <h1 class="hero__title">
+                Operaciones más rápidas.<br />
+                Decisiones más claras.
+            </h1>
+
+            <p class="hero__description">
+                Un ERP SaaS premium para equipos que necesitan automatizar procesos,
+                unificar datos y escalar con confianza - sin complejidad innecesaria.
+            </p>
+
+            <div class="hero__actions">
+                <app-button variant="primary" routerLink="/auth/register">Empezar gratis ➜</app-button>
+                <app-button variant="secondary" href="">➤ Ver demo</app-button>
+            </div>
+
+            <div class="hero__trust">
+                <span class="hero__trust-item">
+                    <svg class="hero__trust-icon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M20 6L9 17l-5-5" />
+                    </svg>
+                    2,400+ empresas confían en nosotros
+                </span>
+                <span class="hero__trust-item">
+                    <svg class="hero__trust-icon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M20 6L9 17l-5-5" />
+                    </svg>
+                    Seguridad empresarial
+                </span>
+            </div>
+        </div>
+
+        <div class="hero__visual">
+            <img
+            class="hero__mockup"
+            ngSrc="/images/mockup1.png"
+            width="600"
+            height="400"
+        />
+        </div>
     </section>
 </main>

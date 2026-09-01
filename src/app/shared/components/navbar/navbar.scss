@@ -1,6 +1,45 @@
-.header {
+.navbar {
     display: flex;
-    gap: 1rem;
-    padding: 1rem;
-    background-color: gray;
+    align-items: center;
+    justify-content: space-between;
+    max-width: 75rem;
+    margin: 0 auto;
+    padding: 1rem 3rem;
+
+    &__logo {
+        font-weight: 700;
+        font-size: 1rem;
+    }
+
+    &__links {
+        display: flex;
+        align-items: center;
+        gap: 2rem;
+    }
+
+    &__link {
+        text-decoration: none;
+        color: #374151;
+        font-size: 1rem;
+
+        &:hover {
+            color: #111827;
+        }
+    }
+
+    &__actions {
+        display: flex;
+        align-items: center;
+        gap: 1.5rem;
+    }
+
+    &__login {
+        text-decoration: none;
+        color: #374151;
+        font-size: 0.9rem;
+
+        &:hover {
+            color: #111827;
+        }
+    }
 }
